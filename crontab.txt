@@ -1,0 +1,1 @@
+30 * * * * cd /path/url-monitor && python3 url-monitor.py

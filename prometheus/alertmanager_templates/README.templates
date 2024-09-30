@@ -1,0 +1,4 @@
+Place here custom template definitions for the Alert Manager.
+
+The default templates are defined in
+/usr/share/prometheus/alertmanager/default.tmpl

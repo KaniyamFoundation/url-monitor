@@ -1,0 +1,117 @@
+# Sample config for Prometheus.
+
+global:
+  scrape_interval:     300s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 300s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+  scrape_timeout: 300s
+  # query_log_file: /var/log/prometheus/query.log
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'example'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['localhost:9093']
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 300s
+    scrape_timeout: 300s
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: node
+    # If prometheus-node-exporter is installed, grab stats about the local
+    # machine by default.
+    static_configs:
+      - targets: ['localhost:9100']
+
+  - job_name: domain
+    scrape_interval: 300s
+    scrape_timeout: 300s
+    metrics_path: /probe
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: localhost:9222 # domain_exporter address
+    static_configs:
+      - targets:
+        - kaniyam.com
+        - freetamilebooks.com
+        - watchub.pw
+        - tamillinuxcommunity.org
+        - sangaelakkiyam.org
+        - mohan43u.space
+        - mlmmamallan.in
+        - newcastletamilacademy.uk
+        - sukraadance.com
+        - sosialistamilmalaysia.org
+        - vspmanickam.in
+        - texlords.in
+        - palmleafpress.net
+        - ravidreams.net
+        - zhamennagam.in
+        - herstories.xyz
+        - venkatarangan.com
+        - thinnai.com
+        - parathan.com
+        - madraspaper.com
+        - akazhonline.com
+        - lakshmisaravanakumar.com
+        - jothiprasath.com
+#        - kaniyam.cloudns.nz
+        - neechalkaran.com
+        - tamilpesu.us
+        - vasagasalai.com
+        - keetru.com
+        - inamtamil.com
+        - omtamil.com
+        - valluvarvallalarvattam.com
+        - vilaiyaatu.com
+#        - annai.no
+        - mydictionary.in
+        - parottasalna.com
+        - brainsurgeon.in
+        - doctorbruno.in
+        - fshm.org
+        - fsftn.org
+        - chennaipy.org
+        - vglug.org
+        - ilugc.in
+        - infitt.org
+        - projectmadurai.org
+        - tamildigitallibrary.in
+        - sramakrishnan.com
+        - writerpara.com
+        - agrisakthi.com
+        - visualmediatech.com
+        - cloudsindia.in
+        - udhayam.in
+        - payilagam.com
+        - rmrl.in
+        - saama.com
+        - arunmozhi.in
+        - thejeshgn.com
+        - sanchaya.org
+        - selvaraj.us
+        - noolaham.org
+        - noolaham.media	
